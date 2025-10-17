@@ -1,0 +1,125 @@
+version: '3.8'
+x-common-hosts: &common-hosts
+  - "host.docker.internal:host-gateway"
+services:
+  # RTSP Simulator - Camera 1
+  simulator-cam1:
+    build: .
+    image: rtsp-simulator
+    container_name: simulator-cam1
+    ports:
+      - "28551:8554"  # Expose simulator's own RTSP server
+    volumes:
+      # Mount video files directory
+      - ./cam1:/app/videos
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/config.yaml:/app/config.yaml:ro
+      - $PWD/simulation_v2.py:/app/simulation.py
+      - $PWD/schemas.py:/app/schemas.py
+    command: --cam cam1
+    restart: unless-stopped
+    extra_hosts: *common-hosts
+
+  # Add more camera simulators as needed
+  simulator-cam2:
+    build: .
+    image: rtsp-simulator
+    container_name: simulator-cam2
+    ports:
+      - "28552:8554"  # Expose simulator's own RTSP server
+    volumes:
+      # Mount video files directory
+      - ./cam2:/app/videos
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/config.yaml:/app/config.yaml:ro
+      - $PWD/simulation_v2.py:/app/simulation.py
+      - $PWD/schemas.py:/app/schemas.py
+    command: --cam cam2
+    restart: unless-stopped
+    extra_hosts: *common-hosts
+
+  simulator-cam3:
+    build: .
+    image: rtsp-simulator
+    container_name: simulator-cam3
+    ports:
+      - "28553:8554"  # Expose simulator's own RTSP server
+    volumes:
+      # Mount video files directory
+      - ./cam3:/app/videos
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/config.yaml:/app/config.yaml:ro
+      - $PWD/simulation_v2.py:/app/simulation.py
+      - $PWD/schemas.py:/app/schemas.py
+    command: --cam cam3
+    restart: unless-stopped
+    extra_hosts: *common-hosts
+
+  simulator-cam4:
+    build: .
+    image: rtsp-simulator
+    container_name: simulator-cam4
+    ports:
+      - "28554:8554"  # Expose simulator's own RTSP server
+    volumes:
+      # Mount video files directory
+      - ./cam4:/app/videos
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/config.yaml:/app/config.yaml:ro
+      - $PWD/simulation_v2.py:/app/simulation.py
+      - $PWD/schemas.py:/app/schemas.py
+    command: --cam cam4
+    restart: unless-stopped
+    extra_hosts: *common-hosts
+
+  simulator-cam5:
+    build: .
+    image: rtsp-simulator
+    container_name: simulator-cam5
+    ports:
+      - "28555:8554"  # Expose simulator's own RTSP server
+    volumes:
+      # Mount video files directory
+      - ./cam5:/app/videos
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/config.yaml:/app/config.yaml:ro
+      - $PWD/simulation_v2.py:/app/simulation.py
+      - $PWD/schemas.py:/app/schemas.py
+    command: --cam cam5
+    restart: unless-stopped
+    extra_hosts: *common-hosts
+
+  simulator-cam6:
+    build: .
+    image: rtsp-simulator
+    container_name: simulator-cam6
+    ports:
+      - "28556:8554"  # Expose simulator's own RTSP server
+    volumes:
+      # Mount video files directory
+      - ./cam6:/app/videos
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/config.yaml:/app/config.yaml:ro
+      - $PWD/simulation_v2.py:/app/simulation.py
+      - $PWD/schemas.py:/app/schemas.py
+    command: --cam cam6
+    restart: unless-stopped
+    extra_hosts: *common-hosts
+
+  simulator-cam7:
+    build: .
+    image: rtsp-simulator
+    container_name: simulator-cam7
+    ports:
+      - "28557:8554"  # Expose simulator's own RTSP server
+    volumes:
+      # Mount video files directory
+      - ./cam7:/app/videos
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/config.yaml:/app/config.yaml:ro
+      - $PWD/simulation_v2.py:/app/simulation.py
+      - $PWD/schemas.py:/app/schemas.py
+    command: --cam cam7
+    restart: unless-stopped
+    extra_hosts: *common-hosts
+

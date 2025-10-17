@@ -1,0 +1,273 @@
+# Configuration Variables
+# Set RTSP_HOST environment variable to override the default RTSP server IP
+# Example: export RTSP_HOST=192.168.1.100
+# Default: 10.10.70.105
+#
+# Set INFERENCE_DEVICE_CAMx to configure inference device for each camera
+# Valid values: 'intel:GPU', 'intel:NPU', 'intel:CPU'
+# Example: export INFERENCE_DEVICE_CAM1=intel:NPU
+# Defaults:
+#   CAM1: intel:GPU
+#   CAM2: intel:NPU
+#   CAM3: intel:GPU
+#   CAM4: intel:NPU
+#   CAM5: intel:GPU
+#   CAM6: intel:GPU
+#   CAM7: intel:CPU
+
+x-common-environment: &common-environment
+  TZ: "Asia/Taipei"
+  # OPENBLAS_MAIN_FREEZE: "1"
+  # OPENBLAS_NUM_THREADS: "1"
+  # OMP_NUM_THREADS: "1"
+x-common-tmpfs: &common-tmpfs
+  - /tmp/write_cache:size=100M,noexec,nosuid,nodev
+x-common-hosts: &common-hosts
+  - "host.docker.internal:host-gateway"
+
+x-common-groups: &common-groups
+  - "109" # render
+  - "110" # render
+  - "44"  # video
+  - "46"  # plugdev
+
+
+services:
+
+  mediamtx:
+    image: bluenviron/mediamtx:latest-ffmpeg
+    container_name: mediamtx
+    restart: unless-stopped
+    network_mode: "host"
+    privileged: true
+    environment:
+      - TZ=Asia/Taipei
+      - MTX_APIADDRESS=:9997
+      - MTX_RECORD=no
+    # volumes:
+    #   - /data/mediamtx/recordings:/recordings
+    #   - /data/monitor:/monitor
+    #   - /etc/localtime:/etc/localtime:ro
+    #   - ./mediamtx_config/mediamtx_$MACHINE_ID.yml:/mediamtx.yml
+    #   - ./scripts/$MACHINE_ID:/scripts
+
+  ai-cam1:
+    image: openvino-gpu-npu
+    container_name: ai-cam1
+    restart: unless-stopped
+    group_add: *common-groups
+    privileged: true
+    ipc: host
+    working_dir: /app/project
+    environment:
+      <<: *common-environment
+      STORE_NAME: westgate
+      CAMERA_NAME: cam1
+      LOG_FILE_NAME: ../log/application/ai-cam1.log
+      IS_REALTIME: True
+      SETTINGS_PATH: config/ai_service_setting_westgate_openvino.yaml
+      ROI_BASE_PATH: config/roi_areas/prod/v2_broader/relative
+      RTSP_SOURCE: rtsp://${RTSP_HOST:-10.10.70.105}:28551/simulation
+      INFERENCE_DEVICE: ${INFERENCE_DEVICE_CAM1:-intel:GPU}
+    devices: 
+      - /dev/:/dev/
+    shm_size: "256mb"
+    ports:
+      - "3501:5000"
+    volumes:
+        - $PWD/ai_model:/app/ai_model
+        - $PWD/log:/app/log
+        - $PWD/config/struct.py:/app/project/config/struct.py
+        - $PWD/config/ai_service_setting_westgate_openvino.yaml:/app/project/config/ai_service_setting_westgate_openvino.yaml
+    extra_hosts: *common-hosts
+    tmpfs: *common-tmpfs
+
+  ai-cam2:
+    image: openvino-gpu-npu
+    container_name: ai-cam2
+    restart: unless-stopped
+    group_add: *common-groups
+    privileged: true
+    ipc: host
+    working_dir: /app/project
+    environment:
+      <<: *common-environment
+      STORE_NAME: westgate
+      CAMERA_NAME: cam2
+      LOG_FILE_NAME: ../log/application/ai-cam2.log
+      IS_REALTIME: True
+      SETTINGS_PATH: config/ai_service_setting_westgate_openvino.yaml
+      ROI_BASE_PATH: config/roi_areas/prod/v2_broader/relative
+      RTSP_SOURCE: rtsp://${RTSP_HOST:-10.10.70.105}:28552/simulation
+      INFERENCE_DEVICE: ${INFERENCE_DEVICE_CAM2:-intel:NPU}
+    devices: 
+      - /dev/:/dev/
+    shm_size: "256mb"
+    ports:
+      - "3502:5000"
+    volumes:
+        - $PWD/ai_model:/app/ai_model
+        - $PWD/log:/app/log
+        - $PWD/config/struct.py:/app/project/config/struct.py
+        - $PWD/config/ai_service_setting_westgate_openvino.yaml:/app/project/config/ai_service_setting_westgate_openvino.yaml
+    extra_hosts: *common-hosts
+    tmpfs: *common-tmpfs
+
+  ai-cam3:
+    image: openvino-gpu-npu
+    container_name: ai-cam3
+    restart: unless-stopped
+    group_add: *common-groups
+    privileged: true
+    ipc: host
+    working_dir: /app/project
+    environment:
+      <<: *common-environment
+      STORE_NAME: westgate
+      CAMERA_NAME: cam3
+      LOG_FILE_NAME: ../log/application/ai-cam3.log
+      IS_REALTIME: True
+      SETTINGS_PATH: config/ai_service_setting_westgate_openvino.yaml
+      ROI_BASE_PATH: config/roi_areas/prod/v2_broader/relative
+      RTSP_SOURCE: rtsp://${RTSP_HOST:-10.10.70.105}:28553/simulation
+      INFERENCE_DEVICE: ${INFERENCE_DEVICE_CAM3:-intel:GPU}
+    devices: 
+      - /dev/:/dev/
+    shm_size: "256mb"
+    ports:
+      - "3503:5000"
+    volumes:
+        - $PWD/ai_model:/app/ai_model
+        - $PWD/log:/app/log
+        - $PWD/config/struct.py:/app/project/config/struct.py
+        - $PWD/config/ai_service_setting_westgate_openvino.yaml:/app/project/config/ai_service_setting_westgate_openvino.yaml
+    extra_hosts: *common-hosts
+    tmpfs: *common-tmpfs
+
+  ai-cam4:
+    image: openvino-gpu-npu
+    container_name: ai-cam4
+    restart: unless-stopped
+    group_add: *common-groups
+    privileged: true
+    ipc: host
+    working_dir: /app/project
+    environment:
+      <<: *common-environment
+      STORE_NAME: westgate
+      CAMERA_NAME: cam4
+      CAMERA_DUPLICATE: True
+      LOG_FILE_NAME: ../log/application/ai-cam4.log
+      IS_REALTIME: True
+      SETTINGS_PATH: config/ai_service_setting_westgate_openvino.yaml
+      ROI_BASE_PATH: config/roi_areas/prod/v2_broader/relative
+      RTSP_SOURCE: rtsp://${RTSP_HOST:-10.10.70.105}:28554/simulation
+      INFERENCE_DEVICE: ${INFERENCE_DEVICE_CAM4:-intel:NPU}
+    devices: 
+      - /dev/:/dev/
+    shm_size: "256mb"
+    ports:
+      - "3504:5000"
+    volumes:
+        - $PWD/ai_model:/app/ai_model
+        - $PWD/log:/app/log
+        - $PWD/config/struct.py:/app/project/config/struct.py
+        - $PWD/config/ai_service_setting_westgate_openvino.yaml:/app/project/config/ai_service_setting_westgate_openvino.yaml
+    extra_hosts: *common-hosts
+    tmpfs: *common-tmpfs
+
+  ai-cam5:
+    image: openvino-gpu-npu
+    container_name: ai-cam5
+    restart: unless-stopped
+    group_add: *common-groups
+    privileged: true
+    ipc: host
+    working_dir: /app/project
+    environment:
+      <<: *common-environment
+      STORE_NAME: westgate
+      CAMERA_NAME: cam5
+      CAMERA_DUPLICATE: True
+      LOG_FILE_NAME: ../log/application/ai-cam5.log
+      IS_REALTIME: True
+      SETTINGS_PATH: config/ai_service_setting_westgate_openvino.yaml
+      ROI_BASE_PATH: config/roi_areas/prod/v2_broader/relative
+      RTSP_SOURCE: rtsp://${RTSP_HOST:-10.10.70.105}:28555/simulation
+      INFERENCE_DEVICE: ${INFERENCE_DEVICE_CAM5:-intel:GPU}
+    devices: 
+      - /dev/:/dev/
+    shm_size: "256mb"
+    ports:
+      - "3505:5000"
+    volumes:
+        - $PWD/ai_model:/app/ai_model
+        - $PWD/log:/app/log
+        - $PWD/config/struct.py:/app/project/config/struct.py
+        - $PWD/config/ai_service_setting_westgate_openvino.yaml:/app/project/config/ai_service_setting_westgate_openvino.yaml
+    extra_hosts: *common-hosts
+    tmpfs: *common-tmpfs
+
+  ai-cam6:
+    image: openvino-gpu-npu
+    container_name: ai-cam6
+    restart: unless-stopped
+    group_add: *common-groups
+    privileged: true
+    ipc: host
+    working_dir: /app/project
+    environment:
+      <<: *common-environment
+      STORE_NAME: westgate
+      CAMERA_NAME: cam6
+      CAMERA_DUPLICATE: True
+      LOG_FILE_NAME: ../log/application/ai-cam6.log
+      IS_REALTIME: True
+      SETTINGS_PATH: config/ai_service_setting_westgate_openvino.yaml
+      ROI_BASE_PATH: config/roi_areas/prod/v2_broader/relative
+      RTSP_SOURCE: rtsp://${RTSP_HOST:-10.10.70.105}:28556/simulation
+      INFERENCE_DEVICE: ${INFERENCE_DEVICE_CAM6:-intel:GPU}
+    devices: 
+      - /dev/:/dev/
+    shm_size: "256mb"
+    ports:
+      - "3506:5000"
+    volumes:
+        - $PWD/ai_model:/app/ai_model
+        - $PWD/log:/app/log
+        - $PWD/config/struct.py:/app/project/config/struct.py
+        - $PWD/config/ai_service_setting_westgate_openvino.yaml:/app/project/config/ai_service_setting_westgate_openvino.yaml
+    extra_hosts: *common-hosts
+    tmpfs: *common-tmpfs
+
+  ai-cam7:
+    image: openvino-gpu-npu
+    container_name: ai-cam7
+    restart: unless-stopped
+    group_add: *common-groups
+    privileged: true
+    ipc: host
+    working_dir: /app/project
+    environment:
+      <<: *common-environment
+      STORE_NAME: westgate
+      CAMERA_NAME: cam7
+      CAMERA_DUPLICATE: True
+      LOG_FILE_NAME: ../log/application/ai-cam7.log
+      IS_REALTIME: True
+      SETTINGS_PATH: config/ai_service_setting_westgate_openvino.yaml
+      ROI_BASE_PATH: config/roi_areas/prod/v2_broader/relative
+      RTSP_SOURCE: rtsp://${RTSP_HOST:-10.10.70.105}:28557/simulation
+      INFERENCE_DEVICE: ${INFERENCE_DEVICE_CAM7:-intel:CPU}
+    devices: 
+      - /dev/:/dev/
+    shm_size: "256mb"
+    ports:
+      - "3507:5000"
+    volumes:
+        - $PWD/ai_model:/app/ai_model
+        - $PWD/log:/app/log
+        - $PWD/config/struct.py:/app/project/config/struct.py
+        - $PWD/config/ai_service_setting_westgate_openvino.yaml:/app/project/config/ai_service_setting_westgate_openvino.yaml
+    extra_hosts: *common-hosts
+    tmpfs: *common-tmpfs

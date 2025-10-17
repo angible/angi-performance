@@ -1,0 +1,260 @@
+capture:
+  source: 'rtsp://host.docker.internal:8554/cam_source'
+  limit_fps: 15
+  frame_width: 1920
+  frame_height: 1080
+  attach_barcode_enable: True
+  default_barcode_width: 0
+  default_barcode_height: 160
+  ori_frame_width: 1920
+  ori_frame_height: 1080
+  dst_frame_width: 640
+  dst_frame_height: 480
+  camera_name: 'webcam'
+  mediamtx_barcode_output_path: ""
+  mediamtx_ai_output_path: ""
+  resize_before_capture: False
+  inference_device: 'AUTO' # 'intel:CPU', 'intel:GPU', 'intel:NPU'
+  ai_enable: True
+  codec: "h264"
+  hwaccel: "cuda"
+  ffmpeg_path: "ffmpeg"
+  # todo: preprocess
+
+cameras:
+  cam1:
+    camera_name: 'cam1'
+    source: 'rtsp://10.10.70.105:8551/cam1'
+    limit_fps: 15
+    attach_barcode_enable: True
+    default_barcode_width: 160
+    default_barcode_height: 160
+    ori_frame_width: 640
+    ori_frame_height: 480
+    dst_frame_width: 640
+    dst_frame_height: 480
+    mediamtx_barcode_output_path: 'cam1'
+    mediamtx_ai_output_path: 'cam1_ai'
+    resize_before_capture: False
+    inference_device: 'intel:GPU' # 'intel:CPU', 'intel:GPU', 'intel:NPU'
+    ai_enable: True
+    codec: "h264"
+    hwaccel: "default"
+    od_enable: True
+    ffmpeg_path: "ffmpeg"
+
+  cam2:
+    camera_name: 'cam2'
+    source: 'rtsp://10.10.70.105:8552/cam2'
+    limit_fps: 15
+    attach_barcode_enable: True
+    default_barcode_width: 160
+    default_barcode_height: 160
+    ori_frame_width: 640
+    ori_frame_height: 480
+    dst_frame_width: 640
+    dst_frame_height: 480
+    mediamtx_barcode_output_path: 'cam2'
+    mediamtx_ai_output_path: 'cam2_ai'
+    resize_before_capture: False
+    inference_device: 'intel:GPU' # 'intel:CPU', 'intel:GPU', 'intel:NPU'
+    ai_enable: True
+    codec: "h264"
+    hwaccel: "default"
+    od_enable: True
+    ffmpeg_path: "ffmpeg"
+
+  cam3:
+    camera_name: 'cam3'
+    source: 'rtsp://10.10.70.105:8553/cam3'
+    limit_fps: 15
+    attach_barcode_enable: True
+    default_barcode_width: 160
+    default_barcode_height: 160
+    ori_frame_width: 640
+    ori_frame_height: 480
+    dst_frame_width: 640
+    dst_frame_height: 480
+    mediamtx_barcode_output_path: 'cam3'
+    mediamtx_ai_output_path: 'cam3_ai'
+    resize_before_capture: False
+    inference_device: 'intel:NPU' # 'intel:CPU', 'intel:GPU', 'intel:NPU'
+    ai_enable: True
+    codec: "h264"
+    hwaccel: "default"
+    od_enable: True
+    ffmpeg_path: "ffmpeg"
+
+  cam4:
+    camera_name: 'cam4'
+    source: 'rtsp://10.10.70.105:8557/cam4'
+    limit_fps: 15
+    attach_barcode_enable: True
+    default_barcode_width: 160
+    default_barcode_height: 160
+    ori_frame_width: 640
+    ori_frame_height: 480
+    dst_frame_width: 640
+    dst_frame_height: 480
+    mediamtx_barcode_output_path: 'cam4'
+    mediamtx_ai_output_path: 'cam4_ai'
+    resize_before_capture: False
+    inference_device: 'intel:NPU' # 'intel:CPU', 'intel:GPU', 'intel:NPU'
+    ai_enable: True
+    codec: "h264"
+    hwaccel: "default"
+    od_enable: True
+    ffmpeg_path: "ffmpeg"
+
+  cam5:
+    camera_name: 'cam5'
+    source: 'rtsp://10.10.70.105:8558/cam5'
+    limit_fps: 15
+    attach_barcode_enable: True
+    default_barcode_width: 160
+    default_barcode_height: 160
+    ori_frame_width: 640
+    ori_frame_height: 480
+    dst_frame_width: 640
+    dst_frame_height: 480
+    mediamtx_barcode_output_path: 'cam5'
+    mediamtx_ai_output_path: 'cam5_ai'
+    resize_before_capture: False
+    inference_device: 'intel:NPU' # 'intel:CPU', 'intel:GPU', 'intel:NPU'
+    ai_enable: True
+    codec: "h264"
+    hwaccel: "default"
+    od_enable: True
+    ffmpeg_path: "ffmpeg"
+
+  cam6:
+    camera_name: 'cam6'
+    source: 'rtsp://10.10.70.105:8558/cam5'
+    limit_fps: 15
+    attach_barcode_enable: True
+    default_barcode_width: 160
+    default_barcode_height: 160
+    ori_frame_width: 640
+    ori_frame_height: 480
+    dst_frame_width: 640
+    dst_frame_height: 480
+    mediamtx_barcode_output_path: 'cam6'
+    mediamtx_ai_output_path: 'cam6_ai'
+    resize_before_capture: False
+    inference_device: 'intel:NPU' # 'intel:CPU', 'intel:GPU', 'intel:NPU'
+    ai_enable: True
+    codec: "h264"
+    hwaccel: "default"
+    od_enable: True
+    ffmpeg_path: "ffmpeg"
+
+  cam7:
+    camera_name: 'cam7'
+    source: 'rtsp://10.10.70.105:8558/cam7'
+    limit_fps: 15
+    attach_barcode_enable: True
+    default_barcode_width: 160
+    default_barcode_height: 160
+    ori_frame_width: 640
+    ori_frame_height: 480
+    dst_frame_width: 640
+    dst_frame_height: 480
+    mediamtx_barcode_output_path: 'cam7'
+    mediamtx_ai_output_path: 'cam7_ai'
+    resize_before_capture: False
+    inference_device: 'intel:NPU' # 'intel:CPU', 'intel:GPU', 'intel:NPU'
+    ai_enable: True
+    codec: "h264"
+    hwaccel: "default"
+    od_enable: True
+    ffmpeg_path: "ffmpeg"
+
+writer:
+  date: '2024-11-02'
+  # dump_root: '/data/mnt/mnt_ml_shared/clips_ToBeVerified/Central/Westgate/${date}/0509'
+  dump_root: '/recordings/'
+  dump_root_labeler: '/mnt/nvme1n1/workspace/angi-sco-service/project/Dump/temp'
+  write_raw: False
+  write_ai: True
+  max_streaming_frame: 54000   #15*60*60
+  write_segment_clip: True
+  clip_image_buffer: 450   # number of frames to be cached as video for each file, and be used to concat in to an event-video if needed
+  instant_clip_frame_num: 150
+
+ai:
+  version: "v2"
+  detection:
+    ai_model_format: "openvino"
+    ai_model_path: "../ai_model/detection_hod_jde/v0.2.1_640_fp16/best_openvino_model"
+    ai_result_dir: ''
+    confidence_threshold: 0.3
+    iou_threshold: 0.5
+    predictor_type: "jde" # jde, numpy_postprocess, default, embed, embed_tracktrack
+    padding_enable: False
+
+  od:
+    ai_model_format: "openvino"
+    ai_model_path: "../ai_model/detection_hod_jde/v0.2.1_640_fp16/best_openvino_model"
+    ai_result_dir: ''
+    confidence_threshold: 0.3
+    iou_threshold: 0.5
+    padding_enable: False
+    predictor_type: "jde" # jde, numpy_postprocess, default, embed, embed_tracktrack
+
+  tracking:
+    tracking_class_names: ['hand_object', 'high_risk_product', 'gun']
+    max_age: 1
+    asso_func: 'diou'
+    min_hits: 1
+    tracker_type: "deepocsort" #deepocsort, tracktrack
+    track_detect_threshold: 0.15
+    asso_threshold: 0.5
+    asso_threshold_second: 0.3
+
+  tracking_od:
+    tracking_class_names: ['commodity', 'basket', 'bag']
+    max_age: 1
+    asso_func: 'diou'
+    min_hits: 1
+    tracker_type: "deepocsort"
+    track_detect_threshold: 0.2
+    asso_threshold: 0.5
+
+  logic:
+    barcode_calibrate_threshold: 0.5  # sec
+    barcode_calibrate_threshold2: 1.34  # sec
+    revive_cooldown_time: 0.5   # sec
+    revive_threshold_dt: 0.5   # sec
+    revive_threshold_iou: 0.5   # sec
+    stitch_missing_item_dt: [-0.5, 0.5] # sec
+    tracking121_iou_thres: 0.3
+    bool_tracking121: True
+    nonweighting_camera_list: ['cam3', 'cam9']
+  roi:
+    normalized_enable: True
+
+visualizer:
+  resize_preview_window: [1280, 720]
+  change_preview_window_size: True
+  show_od: True
+  show_roi_name: False
+  show_timestamps: True
+  attach_barcode_enable_in_vis: True # please set it True when in production, there are some bugs in the barcode attach feature when setting to False
+  show_nonweight_info: True
+  show_od_name: False
+  show_static_warning_event: True
+  show_od_id: True
+
+sco:
+  mediamtx_playback_url: 'http://host.docker.internal:9996'
+  callback_url: 'http://host.docker.internal:10000/v1/ai-service/{sco_id}/alerts'
+  event_saving_folder: '/data/ai_events'
+  timezone: 'Asia/Taipei'
+  video_cut_when_transaction_start: False
+  video_cut_before_duration: 3 # second
+  video_cut_after_duration: 1 # second
+  send_alert_enable: True
+  wait_before_cutting: 0  # seconds, wait before cut the video after the event is detected
+  static_video_cut_before_duration: 3 # second
+  static_video_cut_after_duration: 1 # second
+  use_tracker_start_ts_as_clip_start_time: False

@@ -1,0 +1,64 @@
+# RTSP Simulator Configuration
+# This file contains settings for all camera simulators
+
+# Camera configurations
+cameras:
+  cam1:
+    video: /app/videos/output.mp4
+    api_url: http://10.10.70.75:3501/v1
+    rtsp_port: 8554
+    fps: 15
+    google_drive_url: "https://drive.google.com/file/d/1uus7c_hA9N5GlPfFdBDgAZ6RaEhqoPbV/view?usp=sharing"
+  
+  cam2:
+    video: /app/videos/output.mp4
+    api_url: http://10.10.70.75:3502/v1
+    rtsp_port: 8554
+    fps: 15
+    google_drive_url: "https://drive.google.com/file/d/1uus7c_hA9N5GlPfFdBDgAZ6RaEhqoPbV/view?usp=sharing"
+  
+  cam3:
+    video: /app/videos/output.mp4
+    api_url: http://10.10.70.75:3503/v1
+    rtsp_port: 8554
+    fps: 15
+    google_drive_url: "https://drive.google.com/file/d/1PwNF2qEk1P_uZJgzXF3AySvvyRvhX-u6/view?usp=sharing"
+  
+  cam4:
+    video: /app/videos/output.mp4
+    api_url: http://10.10.70.75:3504/v1
+    rtsp_port: 8554
+    fps: 15
+    google_drive_url: "https://drive.google.com/file/d/1tMhtilVlWPWek1VtHXYh4GQjcT79Abev/view?usp=sharing"
+  
+  cam5:
+    video: /app/videos/output.mp4
+    api_url: http://10.10.70.75:3505/v1
+    rtsp_port: 8554
+    fps: 15
+    google_drive_url: "https://drive.google.com/file/d/1--dPvA2eTTrtE6-OUwqHr8EgrEHsnu7m/view?usp=sharing"
+  
+  cam6:
+    video: /app/videos/output.mp4
+    api_url: http://10.10.70.75:3506/v1
+    rtsp_port: 8554
+    fps: 15
+    google_drive_url: "https://drive.google.com/file/d/1iPzx8skcjQnW-d_WmLutwQda4ms-AogV/view?usp=sharing"
+  
+  cam7:
+    video: /app/videos/output.mp4
+    api_url: http://10.10.70.75:3507/v1
+    rtsp_port: 8554
+    fps: 15
+    google_drive_url: "https://drive.google.com/file/d/1wZNl731f-PX54nVmJuyEPczW6PR7nZDb/view?usp=sharing"
+
+# Default video processing settings
+defaults:
+  original_width: 800
+  original_height: 640
+  frame_width: 640
+  frame_height: 480
+  qrcode_size: 160
+  queue_size: 30
+  warmup_frames: 90
+  timezone: "Asia/Taipei"  # Timezone for timestamps (e.g., "Asia/Taipei", "UTC", "America/New_York")
